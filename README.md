@@ -18,7 +18,7 @@
 
 # Forense Móvil GT
 
-**Herramienta profesional de análisis forense para dispositivos Android e iOS**
+**Herramienta profesional de análisis para dispositivos Android e iOS**
 
 [![Version](https://img.shields.io/badge/versión-V1-blue?style=for-the-badge)](https://github.com/hackingsegurgt/forense-movil-gt)
 [![Backend](https://img.shields.io/badge/backend-FastAPI-009688?style=for-the-badge&logo=fastapi)](https://fastapi.tiangolo.com/)
@@ -270,20 +270,6 @@ La API está disponible en `http://localhost:8000`. Documentación interactiva e
 | `GET` | `/api/reports/cases/{id}/pericial/latest-pdf` | Descargar último PDF del caso |
 | `GET` | `/api/ios/devices` | Detectar dispositivos iOS |
 | `POST` | `/api/ios/backup/{udid}` | Iniciar backup iOS |
-
----
-
-## 🖼️ Branding
-
-Coloca los archivos de imagen de la herramienta en:
-
-```
-frontend/public/assets/branding/
-├── brand-logo.png    ← Logo principal del encabezado (52×52px mínimo)
-└── favicon.png       ← Ícono de la pestaña del navegador (32×32px)
-```
-
-Si `brand-logo.png` no existe, se mostrará automáticamente el fallback con las siglas **HS**.
 
 ---
 
