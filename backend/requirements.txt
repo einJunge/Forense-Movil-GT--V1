@@ -1,0 +1,10 @@
+fastapi>=0.110,<1.0
+uvicorn[standard]>=0.29,<1.0
+sqlalchemy>=2.0,<3.0
+psycopg2-binary>=2.9,<3.0
+pydantic>=2.6,<3.0
+python-dotenv>=1.0,<2.0
+requests>=2.31,<3.0
+clamdpy>=0.2.0
+reportlab>=4.2,<5.0
+yara-python>=4.5,<5.0

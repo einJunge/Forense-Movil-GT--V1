@@ -1,0 +1,71 @@
+services:
+
+  # ── Base de datos ─────────────────────────────────────────────────────────────
+  db:
+    image: postgres:15
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: forense_movil_gt
+      POSTGRES_USER: forense
+      POSTGRES_PASSWORD: forense123
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U forense -d forense_movil_gt"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  # ── ClamAV antivirus ──────────────────────────────────────────────────────────
+  clamav:
+    image: clamav/clamav:latest
+    restart: unless-stopped
+    ports:
+      - "3310:3310"
+    volumes:
+      - clamav_db:/var/lib/clamav
+    healthcheck:
+      test: ["CMD", "clamdcheck"]
+      interval: 60s
+      timeout: 10s
+      retries: 5
+      start_period: 120s   # la BD de firmas tarda en descargarse la primera vez
+
+  # ── Backend FastAPI ───────────────────────────────────────────────────────────
+  backend:
+    build: ./backend
+    restart: unless-stopped
+    privileged: true          # necesario para acceso a USB (ADB / usbmuxd)
+    network_mode: host        # permite que usbmuxd del host reenvíe dispositivos iOS
+    environment:
+      - DATABASE_URL=postgresql+psycopg2://forense:forense123@localhost:5432/forense_movil_gt
+      - PYTHONPATH=/app
+      - CLAMAV_HOST=localhost
+      - CLAMAV_PORT=3310
+    volumes:
+      - /dev/bus/usb:/dev/bus/usb          # dispositivos USB Android
+      - /var/run/usbmuxd:/var/run/usbmuxd  # socket iOS (usbmuxd del host)
+      - reports:/var/reports
+      - cases:/var/cases
+    depends_on:
+      db:
+        condition: service_healthy
+      clamav:
+        condition: service_started
+
+  # ── Frontend Vite/React ───────────────────────────────────────────────────────
+  frontend:
+    build: ./frontend
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:
+  clamav_db:
+  reports:
+  cases:
