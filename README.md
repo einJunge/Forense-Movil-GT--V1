@@ -34,7 +34,7 @@
 
 ## 📋 Descripción
 
-**Forense Móvil GT** es una herramienta de análisis forense orientada a investigadores de seguridad, peritos digitales y analistas que necesitan documentar, analizar y exportar evidencia de dispositivos móviles Android e iOS de forma estructurada y reproducible.
+**Forense Móvil GT** es una herramienta de análisis tecnica orientada a investigadores de seguridad, peritos digitales y analistas que necesitan documentar, analizar y exportar evidencia de dispositivos móviles Android e iOS de forma estructurada y reproducible.
 
 Toda la investigación se organiza en torno a un **expediente (caso)**, asegurando que cada análisis, hallazgo, backup y reporte quede aislado y asociado a su expediente correspondiente.
 
