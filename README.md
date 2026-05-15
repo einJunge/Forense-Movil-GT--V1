@@ -78,7 +78,7 @@ Toda la investigación se organiza en torno a un **expediente (caso)**, aseguran
   - Hallazgos y artefactos recolectados
   - Línea de tiempo de eventos
   - Hash SHA-256 para trazabilidad del informe
-- Exportación en **PDF** y **JSON**
+- Exportación en **PDF** 
 - Guardado automático dentro de la carpeta `reportes/` del caso activo
 - Acceso directo al último PDF generado
 
