@@ -129,12 +129,41 @@ forense-movil-gt/
 - ADB instalado en el sistema host (para análisis Android)
 - libimobiledevice instalado (para análisis iOS)
 
-#### Opción 2: Sin Docker
-- Python 3.11 o superior
-- Node.js 18 o superior
-- PostgreSQL 15 instalado y en ejecución
-- ADB instalado en el sistema host (para análisis Android)
-- libimobiledevice instalado (para análisis iOS)
+## Levantar sin Docker
+
+Si prefieres ejecutar el proyecto directamente en tu máquina, también puedes hacerlo sin Docker.
+
+### Requisitos
+- Python 3.11 o superior.
+- Node.js 18 o superior.
+- PostgreSQL 15 instalado y corriendo localmente.
+- ADB instalado en el sistema host para análisis Android.
+- libimobiledevice instalado para análisis iOS.
+
+### Backend
+```bash
+cd backend
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+
+cp .env.example .env
+# Ajusta las variables de conexión a PostgreSQL local
+
+uvicorn main:app --reload --host 0.0.0.0 --port 8000
+```
+
+### Frontend
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+### Acceso
+- Frontend: `http://localhost:3000`
+- API: `http://localhost:8000`
+- Swagger UI: `http://localhost:8000/docs`
 
 ### Levantar la herramienta con Docker
 
